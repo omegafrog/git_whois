@@ -13,11 +13,9 @@ public class User {
 
 	private AuthToken authToken;
 
-	private OAuth2Credential credential;
 
-	public User(String id, OAuth2Credential credential, AuthToken authToken, UserInformation metaData) {
+	public User(String id, AuthToken authToken, UserInformation metaData) {
 		this.id = id;
-		this.credential = credential;
 		this.authToken = authToken;
 		this.metaData = metaData;
 	}
@@ -34,7 +32,5 @@ public class User {
 		return authToken;
 	}
 
-	public OAuth2Credential getCredential() {
-		return credential;
-	}
+
 }
