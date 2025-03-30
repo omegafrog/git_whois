@@ -7,3 +7,10 @@ spring:
 
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+
+custom:
+  jwt:
+    secret: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+    exp: "#{60 * 60 * 30}"
+    refresh-exp: "#{60 * 60 * 60 * 24 * 30}"
+
