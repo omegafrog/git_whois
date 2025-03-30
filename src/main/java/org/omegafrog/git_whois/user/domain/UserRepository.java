@@ -6,4 +6,8 @@ public interface UserRepository {
 	GithubUser save(GithubUser user);
 
 	GithubUser findByGithubId(GithubId id);
+
+	void clear();
+
+	long count();
 }

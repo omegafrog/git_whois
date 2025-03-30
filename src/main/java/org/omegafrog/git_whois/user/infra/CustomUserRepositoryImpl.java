@@ -28,4 +28,14 @@ public class CustomUserRepositoryImpl implements UserRepository {
 	public GithubUser findByGithubId(GithubId id) {
 		return jpaUserRepository.findByMetaData_GithubId(id);
 	}
+
+	@Override
+	public void clear() {
+		jpaUserRepository.deleteAllInBatch();
+	}
+
+	@Override
+	public long count() {
+		return jpaUserRepository.count();
+	}
 }

@@ -12,4 +12,16 @@ public class GithubAccessToken extends AccessToken {
 	public GithubAccessToken(String accessToken, String tokenType) {
 		super(accessToken, tokenType);
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof GithubAccessToken that))
+			return false;
+		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

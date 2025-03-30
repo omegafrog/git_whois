@@ -74,4 +74,7 @@ public class GithubUser {
 		return !userRepository.existByGithubId(githubId);
 	}
 
+	public void changeAccessToken(GithubAccessToken githubAccessToken) {
+		this.githubAccessToken = githubAccessToken;
+	}
 }

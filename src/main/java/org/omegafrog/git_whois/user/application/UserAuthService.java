@@ -52,6 +52,7 @@ public class UserAuthService {
 		}
 		else{
 			user = userRepository.findByGithubId(id);
+			user.changeAccessToken(githubAccessToken);
 		}
 
 		// token 생성

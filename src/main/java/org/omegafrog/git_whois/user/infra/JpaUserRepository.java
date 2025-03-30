@@ -8,4 +8,5 @@ public interface JpaUserRepository extends JpaRepository<GithubUser, String> {
 	GithubUser findByMetaData_GithubId(GithubId metaDataGithubId);
 
 	boolean existsByMetaData_GithubId(GithubId metaDataGithubId);
+
 }
