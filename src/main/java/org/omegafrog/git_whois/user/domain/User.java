@@ -19,7 +19,7 @@ public class User {
 	private final String id = "user-"+ UUID.randomUUID();
 
 	@Embedded
-	private UserInformation metaData;
+	private GithubUserInformation metaData;
 
 	// github api 호출을 위해 사용
 	@Embedded
@@ -28,7 +28,7 @@ public class User {
 	public User() {
 	}
 
-	public User(UserInformation metaData, GithubAccessToken githubAccessToken) {
+	public User(GithubUserInformation metaData, GithubAccessToken githubAccessToken) {
 		this.githubAccessToken = githubAccessToken;
 		this.metaData = metaData;
 	}
@@ -37,7 +37,7 @@ public class User {
 		return id;
 	}
 
-	public UserInformation getMetaData() {
+	public GithubUserInformation getMetaData() {
 		return metaData;
 	}
 
