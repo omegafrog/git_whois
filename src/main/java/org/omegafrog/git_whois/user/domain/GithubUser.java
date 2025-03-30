@@ -70,4 +70,8 @@ public class GithubUser {
 		return new AuthToken(tokens[0], tokens[1]);
 	}
 
+	public boolean canRegister(GithubId githubId, UserRepository userRepository) {
+		return !userRepository.existByGithubId(githubId);
+	}
+
 }
