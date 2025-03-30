@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.omegafrog.git_whois.global.Util;
 import org.omegafrog.git_whois.user.domain.AuthToken;
 import org.omegafrog.git_whois.user.domain.GithubAccessToken;
+import org.omegafrog.git_whois.user.domain.GithubId;
 import org.omegafrog.git_whois.user.domain.User;
 import org.omegafrog.git_whois.user.domain.UserInformation;
 import org.omegafrog.git_whois.user.domain.UserRepository;
@@ -65,7 +66,7 @@ public class UserAuthService {
 	public AuthToken registerOrLogin(String code) throws JsonProcessingException {
 		GithubAccessToken githubAccessToken = requestAccessToken(code);
 		UserInformation userInfo = getUserInfo(githubAccessToken);
-		Long id = userInfo.getGithubId();
+		GithubId id = userInfo.getGithubId();
 
 		User user;
 
@@ -114,12 +115,12 @@ public class UserAuthService {
 		String avatarUrl = jsonNode.get("avatar_url").asText();
 		String nodeId = jsonNode.get("node_id").asText();
 		String name = jsonNode.get("name").asText();
-		long id = jsonNode.get("id").asLong();
+		GithubId githubId = new GithubId(jsonNode.get("id").asLong());
 
-		return new UserInformation(id, loginName, email, avatarUrl, nodeId, name);
+		return new UserInformation(githubId, loginName, email, avatarUrl, nodeId, name);
 	}
 
-	private boolean canRegister(Long githubId, UserRepository userRepository) {
+	private boolean canRegister(GithubId githubId, UserRepository userRepository) {
 		return !userRepository.existByGithubId(githubId);
 	}
 }
