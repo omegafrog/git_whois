@@ -1,6 +1,10 @@
 package org.omegafrog.git_whois.user.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+
+import org.omegafrog.git_whois.global.Util;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -24,7 +28,7 @@ public class User {
 	public User() {
 	}
 
-	public User( GithubAccessToken githubAccessToken, UserInformation metaData) {
+	public User(UserInformation metaData, GithubAccessToken githubAccessToken) {
 		this.githubAccessToken = githubAccessToken;
 		this.metaData = metaData;
 	}
@@ -41,5 +45,17 @@ public class User {
 		return githubAccessToken;
 	}
 
+	public AuthToken generateTokens(int exp, int refreshExp, String secret) {
+		Map<String, Object> claims = new HashMap<>();
+
+		claims.put("id", this.getId());
+		claims.put("name", this.getMetaData().getName());
+		claims.put("nickName", this.getMetaData().getLoginName());
+		claims.put("avatarUrl", this.getMetaData().getAvatarUrl());
+		claims.put("email", this.getMetaData().getEmail());
+		claims.put("jti", UUID.randomUUID().toString());
+		String[] tokens = Util.Jwt.generateTokens(claims, exp, refreshExp, secret);
+		return new AuthToken(tokens[0], tokens[1]);
+	}
 
 }

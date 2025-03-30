@@ -1,10 +1,5 @@
 package org.omegafrog.git_whois.user.application;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import org.omegafrog.git_whois.global.Util;
 import org.omegafrog.git_whois.user.domain.AuthToken;
 import org.omegafrog.git_whois.user.domain.GithubAccessToken;
 import org.omegafrog.git_whois.user.domain.GithubId;
@@ -71,31 +66,16 @@ public class UserAuthService {
 		User user;
 
 		if(canRegister(id, userRepository)){
-			user = userRepository.save(new User(githubAccessToken, userInfo));
+			user = userRepository.save(new User(userInfo, githubAccessToken));
 		}
 		else{
 			user = userRepository.findByGithubId(id);
 		}
 
 		// token 생성
-		return generateToken(user);
+		return user.generateTokens(exp, refreshExp, secret);
 	}
 
-	private AuthToken generateToken(User user) {
-		Map<String, Object> claims = new HashMap<>();
-
-		claims.put("id", user.getId());
-		claims.put("name", user.getMetaData().getName());
-		claims.put("nickName", user.getMetaData().getLoginName());
-		claims.put("avatarUrl", user.getMetaData().getAvatarUrl());
-		claims.put("email", user.getMetaData().getEmail());
-		claims.put("jti", UUID.randomUUID().toString());
-
-		String[] tokens = Util.Jwt.generateTokens(claims, exp, refreshExp, secret);
-
-		return new AuthToken(tokens[0], tokens[1]);
-
-	}
 
 	private UserInformation getUserInfo(GithubAccessToken githubAccessToken) throws JsonProcessingException {
 		// TODO : 외부 API 호출 분리 필요
