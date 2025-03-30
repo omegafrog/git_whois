@@ -19,7 +19,7 @@ class UserTest {
 	@DisplayName("User 생성 시에는 metaData, githubAccessToken이 필수로 주어져야 한다.")
 	void createUser() {
 		//given
-		UserInformation userInfo = new UserInformation(
+		GithubUserInformation userInfo = new GithubUserInformation(
 			new GithubId(1L),
 			"loginName",
 			"email",
@@ -58,7 +58,7 @@ class UserTest {
 		int exp = 60 * 60 * 30;
 		int refreshExp = 60 * 60 * 24;
 		String secret = "abcedfghijklmnopqrstuvwxyzabcedfghijklmnopqrstuvwxyzabcedfghijklmnopqrstuvwxyzabcedfghijklmnopqrstuvwxyzabcedfghijklmnopqrstuvwxyzabcedfghijklmnopqrstuvwxyz";
-		UserInformation userInfo = new UserInformation(
+		GithubUserInformation userInfo = new GithubUserInformation(
 			new GithubId(1L),
 			"loginName",
 			"email",
