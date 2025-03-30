@@ -1,11 +1,11 @@
 package org.omegafrog.git_whois.global;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.Password;
 
 public class Util {
 
@@ -17,7 +17,7 @@ public class Util {
 			Date expiration = new Date(issuedAt.getTime() + 1000L * expSecond);
 			Date refreshExpiration = new Date(issuedAt.getTime() + 1000L * refreshExpSecond);
 
-			Password key = Keys.password(secret.toCharArray());
+			Key key = Keys.hmacShaKeyFor(secret.getBytes());
 			String accessToken = Jwts.builder()
 				.claims(claims)
 				.issuedAt(issuedAt)
