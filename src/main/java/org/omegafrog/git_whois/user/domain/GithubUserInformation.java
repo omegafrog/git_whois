@@ -1,5 +1,7 @@
 package org.omegafrog.git_whois.user.domain;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -48,4 +50,17 @@ public class GithubUserInformation extends UserInformation {
 		return nodeId;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof GithubUserInformation that))
+			return false;
+		return Objects.equals(githubId, that.githubId) && Objects.equals(loginName, that.loginName)
+			&& Objects.equals(avatarUrl, that.avatarUrl) && Objects.equals(nodeId, that.nodeId)
+			&& Objects.equals(name, that.name) && Objects.equals(email, that.email);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(githubId, loginName, avatarUrl, nodeId, email, name);
+	}
 }

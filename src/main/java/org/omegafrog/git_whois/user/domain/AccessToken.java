@@ -1,5 +1,7 @@
 package org.omegafrog.git_whois.user.domain;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 
@@ -35,5 +37,18 @@ public abstract class AccessToken {
 	public AccessToken(String accessToken, String refreshToken, String tokenType) {
 		this(accessToken, tokenType);
 		this.refreshToken = refreshToken;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof AccessToken that))
+			return false;
+		return Objects.equals(accessToken, that.accessToken) && Objects.equals(refreshToken,
+			that.refreshToken) && Objects.equals(tokenType, that.tokenType);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(accessToken, refreshToken, tokenType);
 	}
 }
