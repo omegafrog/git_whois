@@ -20,7 +20,7 @@ public class UserController {
 
 
 
-	@GetMapping("/login/oauth2/code/github")
+	@GetMapping("/login/oauth2/code")
 	public ApiResponse<AuthToken> registerOrLogin(@RequestParam(name = "code") String code) throws JsonProcessingException {
 		AuthToken tokens = userRegisterService.registerOrLogin(code);
 
