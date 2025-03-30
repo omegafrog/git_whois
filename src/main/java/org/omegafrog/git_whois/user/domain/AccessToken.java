@@ -1,9 +1,15 @@
 package org.omegafrog.git_whois.user.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class AccessToken {
 
+	@Column(nullable = false)
 	private String accessToken;
 	private String refreshToken;
+	@Column(nullable = false)
 	private String tokenType;
 
 	public String getAccessToken() {

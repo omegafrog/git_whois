@@ -31,7 +31,7 @@ class UserTest {
 			"accessToken", "Bearer"
 		);
 		// when
-		User user = new User(userInfo, accessTokens);
+		GithubUser user = new GithubUser(userInfo, accessTokens);
 
 		// then
 
@@ -69,7 +69,7 @@ class UserTest {
 		GithubAccessToken accessTokens = new GithubAccessToken(
 			"accessToken", "Bearer"
 		);
-		User user = new User(userInfo, accessTokens);
+		GithubUser user = new GithubUser(userInfo, accessTokens);
 
 		// when
 

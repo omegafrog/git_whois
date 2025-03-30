@@ -1,7 +1,7 @@
 package org.omegafrog.git_whois.user.infra;
 
 import org.omegafrog.git_whois.user.domain.GithubId;
-import org.omegafrog.git_whois.user.domain.User;
+import org.omegafrog.git_whois.user.domain.GithubUser;
 import org.omegafrog.git_whois.user.domain.UserRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,12 +20,12 @@ public class CustomUserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public User save(User user) {
+	public GithubUser save(GithubUser user) {
 		return jpaUserRepository.save(user);
 	}
 
 	@Override
-	public User findByGithubId(GithubId id) {
+	public GithubUser findByGithubId(GithubId id) {
 		return jpaUserRepository.findByMetaData_GithubId(id);
 	}
 }

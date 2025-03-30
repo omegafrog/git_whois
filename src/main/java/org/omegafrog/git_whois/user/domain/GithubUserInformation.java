@@ -9,10 +9,15 @@ import jakarta.persistence.Embedded;
 @Embeddable
 public class GithubUserInformation extends UserInformation {
 	@Embedded
-	@AttributeOverrides(@AttributeOverride(name = "id", column = @Column(name = "github_id")))
+	@AttributeOverrides(
+		@AttributeOverride(name = "id", column = @Column(name = "github_id", nullable = false, unique = true))
+	)
 	private GithubId githubId;
+	@Column(nullable = false)
 	private String loginName;
+	@Column(nullable = false)
 	private String avatarUrl;
+	@Column(nullable = false)
 	private String nodeId;
 
 	public GithubUserInformation(GithubId githubId, String loginName, String email, String avatarUrl, String nodeId,
@@ -25,7 +30,6 @@ public class GithubUserInformation extends UserInformation {
 	}
 
 	protected GithubUserInformation() {
-
 	}
 
 	public GithubId getGithubId() {

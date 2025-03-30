@@ -3,9 +3,9 @@ package org.omegafrog.git_whois.user.application;
 import org.omegafrog.git_whois.user.domain.AuthToken;
 import org.omegafrog.git_whois.user.domain.GithubAccessToken;
 import org.omegafrog.git_whois.user.domain.GithubId;
+import org.omegafrog.git_whois.user.domain.GithubUser;
 import org.omegafrog.git_whois.user.domain.GithubUserInformation;
 import org.omegafrog.git_whois.user.domain.OAuthProvider;
-import org.omegafrog.git_whois.user.domain.User;
 import org.omegafrog.git_whois.user.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,10 +38,10 @@ public class UserAuthService {
 		GithubUserInformation userInfo = (GithubUserInformation)oauthProvider.getUserInformation(githubAccessToken);
 		GithubId id = userInfo.getGithubId();
 
-		User user;
+		GithubUser user;
 
 		if(canRegister(id, userRepository)){
-			user = userRepository.save(new User(userInfo, githubAccessToken));
+			user = userRepository.save(new GithubUser(userInfo, githubAccessToken));
 		}
 		else{
 			user = userRepository.findByGithubId(id);

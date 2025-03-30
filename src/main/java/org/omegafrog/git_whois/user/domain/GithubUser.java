@@ -6,6 +6,9 @@ import java.util.UUID;
 
 import org.omegafrog.git_whois.global.Util;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,22 +16,31 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "member")
-public class User {
+public class GithubUser {
 
 	@Id
 	private final String id = "user-"+ UUID.randomUUID();
 
 	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name = "email", column = @Column(name = "email")),
+		@AttributeOverride(name = "name", column = @Column(name = "name"))
+	})
 	private GithubUserInformation metaData;
 
 	// github api 호출을 위해 사용
 	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name = "accessToken", column = @Column(name = "accessToken")),
+		@AttributeOverride(name = "refreshToken", column = @Column(name = "refreshToken")),
+		@AttributeOverride(name = "tokenType", column = @Column(name = "tokenType"))
+	})
 	private GithubAccessToken githubAccessToken;
 
-	public User() {
+	public GithubUser() {
 	}
 
-	public User(GithubUserInformation metaData, GithubAccessToken githubAccessToken) {
+	public GithubUser(GithubUserInformation metaData, GithubAccessToken githubAccessToken) {
 		this.githubAccessToken = githubAccessToken;
 		this.metaData = metaData;
 	}
