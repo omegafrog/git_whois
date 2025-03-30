@@ -1,22 +1,22 @@
 package org.omegafrog.git_whois.user.domain;
 
-import org.omegafrog.git_whois.user.domain.exception.UserException;
+import java.util.UUID;
+
 
 import jakarta.persistence.Id;
 
 public class User {
 
 	@Id
-	private final String id;
+	private final String id = "user-"+ UUID.randomUUID();
 
 	private UserInformation metaData;
 
-	private AuthToken authToken;
+	// github api 호출을 위해 사용
+	private GithubAccessToken githubAccessToken;
 
-
-	public User(String id, AuthToken authToken, UserInformation metaData) {
-		this.id = id;
-		this.authToken = authToken;
+	public User( GithubAccessToken githubAccessToken, UserInformation metaData) {
+		this.githubAccessToken = githubAccessToken;
 		this.metaData = metaData;
 	}
 
@@ -28,8 +28,8 @@ public class User {
 		return metaData;
 	}
 
-	public AuthToken getAuthToken() {
-		return authToken;
+	public GithubAccessToken getGithubAccessToken() {
+		return githubAccessToken;
 	}
 
 
