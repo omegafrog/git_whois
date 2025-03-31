@@ -48,7 +48,8 @@ public class UserAuthService {
 
 		if (user.canRegister(id, userRepository)) {
 			user = userRepository.save(user);
-		} else {
+		}
+		else{
 			user = userRepository.findByGithubId(id);
 			user.changeAccessToken(githubAccessToken);
 		}

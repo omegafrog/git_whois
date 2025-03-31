@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 public class UserController {
@@ -19,8 +18,7 @@ public class UserController {
 	}
 
 	@GetMapping("/login/oauth2/code")
-	public ApiResponse<AuthToken> registerOrLogin(@RequestParam(name = "code") String code) throws
-		JsonProcessingException {
+	public ApiResponse<AuthToken> registerOrLogin(@RequestParam(name = "code") String code) {
 		AuthToken tokens = userRegisterService.registerOrLoginWithGithub(code);
 
 		return ApiResponse.success("로그인 성공.", tokens);

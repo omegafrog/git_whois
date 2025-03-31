@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 public class GithubUser {
 
 	@Id
-	private final String id = "user-" + UUID.randomUUID();
+	private final String id = "user-"+ UUID.randomUUID();
 
 	@Embedded
 	@AttributeOverrides({
