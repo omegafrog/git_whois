@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+/logs/app.log
+/db_dev.mv.db
+/db_dev.trace.db
